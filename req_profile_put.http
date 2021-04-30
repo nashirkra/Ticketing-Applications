@@ -1,0 +1,23 @@
+PUT http://localhost:8080/api/user/profile HTTP/1.1
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImV4cCI6MTYxOTcxNjA0MiwiaWF0IjoxNjE5NDU2ODQyLCJpc3MiOiJuYXNoaXJrcmEifQ.C6kwUact3UUQkK64fjNKmNtJvl9Y_nn6n0sTARBoFPM
+
+{
+    "Username" : "fathimzr",
+    "Fullname" : "Fathimah ZR",
+    "Email" : "fathimzr@mail.com"
+}
+###
+PUT http://localhost:8080/api/user/profile HTTP/1.1
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImV4cCI6MTYxOTcxNjA0MiwiaWF0IjoxNjE5NDU2ODQyLCJpc3MiOiJuYXNoaXJrcmEifQ.C6kwUact3UUQkK64fjNKmNtJvl9Y_nn6n0sTARBoFPM
+
+{
+    "id":1,
+    "Username" : "fathimazr",
+    "Fullname" : "Fathimah ZR",
+    "Email" : "fathimah@mail.com",
+    "Password" : "passftahimah",
+    "Role" : "participant"
+}
+###

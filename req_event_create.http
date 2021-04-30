@@ -1,0 +1,160 @@
+# first, user login and get the JWT token
+# @name login
+POST http://localhost:8080/api/auth/login HTTP/1.1
+Content-Type: application/json
+Authorization: {{login.response.headers.Authorization}}
+
+{
+    "email":"nasir@mail.com",
+    "password":"passnasir"
+}
+
+# {
+#   "Email" : "fatih@mail.com",
+#   "Password" : "passfatih"}
+###
+
+POST http://localhost:8080/api/admin/event HTTP/1.1
+Content-Type: application/json
+Authorization: {{login.response.headers.Authorization}}
+
+{
+  "title_event": "Post COVID-19: A Transformation in Career Path",
+  "Description": "Mau cari kerja di masa pandemi? Webinar ini pas untuk kamu! Selama dua jam penuh, webinar ini akan membahas masalah karir dan dunia pekerjaan selama masa pandemi. Siapapun bisa ikut dan di akhir webinar kamu akan mendapat e-certificate",
+  "Banner":"banner.png",
+  "Price":50000,
+  "Quantity":1,
+  "event_start_date":"2021-06-01T15:04:05+07:00",
+  "event_end_date":"2021-06-01T15:04:05+07:00",
+  "campaign_start_date":"2021-04-27T15:04:05+07:00",
+  "campaign_end_date":"2021-05-27T15:04:05+07:00"
+}
+###
+POST http://localhost:8080/api/admin/event HTTP/1.1
+Content-Type: application/json
+Authorization: {{login.response.headers.Authorization}}
+
+{
+  "title_event": "GRATIS WEBINAR - 3 RAHASIA SUKSES ORANG AWAM MEMBANGUN BISNIS INTERNET",
+  "Description": "TAHUKAN ANDA ......\n\nSEKARANG ANDA BERADA DALAM ERA DIGITAL.......INTERNET adalah KEHARUSAN bukan PILIHAN LAGI!\n\nBuat Anda yang sedang/baru memulai Usaha Baru, carilah Bisnis yang dapat mendatangkan hasil yang LEBIH MUDAH, LEBIH CEPAT dan TANPA perlu Modal Besar.\n\nBuat Anda yang sudah menjalankan Usaha, ubahlah cara berbisnis Anda dari konvensional menjadi DIGITAL, sehingga penghasilan akan meningkat Lebih Cepat berlipat ganda (Eksponensial}. Jika TIDAK, Anda akan ditinggalkan oleh konsumen Anda.\n\nSaya ajak Anda ikut Webinar GRATIS ini !\n\nAnda akan mendapatkan  RAHASIA  bagaimana Membangung Bisnis Internet:\n\nFormula Bisnis, yang sudah dipraktekkan, tinggal Anda contek ilmunya.\nModel Bisnis, yang bisa Anda terapkan untuk Usaha apapun yang Anda lakukan.\nStrategi Bisnis, yang harus Anda ketahui untuk mendapatkan hasil yang dahsyat.\n3 Skill Internet, terpenting yang harus Anda miliki untuk meningkatkan bisnis Anda.\nNah....Anda bisa pelajari dan praktekan ilmu ini, walaupun Anda  awam dan Gaptek.\n\nSelain itu, \n\nAnda akan mendapatkan 2 BONUS Spesial!  Jika Anda mengikuti Webinar sampai selesai.\n\nCatat waktunya :\n\nHari Sabtu, tgl. 1  Mei  2021,  pk. 10.00 - 11.30  WIB.\n\nMumpung GRATIS, daftarkan SEGERA, karena Slot TERBATAS!\n\nSilahkan DAFTAR  di LINK  ini : https://kontakk.com/wa/mau-webinar\n\nSampai jumpa di Webinar!\n\n \n\nSalam Sukses,\n\nIngrid Trisnawati Kurniawan | Bisnis Internet Coach",
+  "Banner":"https://s3-ap-southeast-1.amazonaws.com/loket-production-sg/images/banner/20201218134944_5fdc5108c9bb4.jpg",
+  "Price":50000,
+  "Quantity":1,
+  "event_start_date":"2021-06-15T15:04:05+07:00",
+  "event_end_date":"2021-06-15T15:04:05+07:00",
+  "campaign_start_date":"2021-04-27T15:04:05+07:00",
+  "campaign_end_date":"2021-05-27T15:04:05+07:00"
+}
+###
+POST http://localhost:8080/api/admin/event HTTP/1.1
+Content-Type: application/json
+Authorization: {{login.response.headers.Authorization}}
+
+{
+  "title_event": "Content Marketing 101: How to Make Your Content Marketing Go Viral",
+  "Description": "“Pengen deh bikin konten yang viral”, pernah merasa begitu? Dunia digital dibanjiri banyak konten menarik yang memiliki persaingan ketat. Untuk membuat konten yang viral, terdapat beberapa strategi yang bisa kamu lakukan. Mau tahu apa aja strateginya? Temukan jawabannya bareng Edho Zell di webinar satu ini",
+  "Banner":"https://s3-ap-southeast-1.amazonaws.com/loket-production-sg/images/banner/20201218134944_5fdc5108c9bb4.jpg",
+  "Price":50000,
+  "Quantity":1,
+  "event_start_date":"2021-06-15T15:04:05+07:00",
+  "event_end_date":"2021-06-15T15:04:05+07:00",
+  "campaign_start_date":"2021-04-27T15:04:05+07:00",
+  "campaign_end_date":"2021-05-27T15:04:05+07:00"
+}
+###
+POST http://localhost:8080/api/admin/event HTTP/1.1
+Content-Type: application/json
+Authorization: {{login.response.headers.Authorization}}
+
+{
+  "title_event": "EF Online Seminar: What’s Your Kid’s Talent?",
+  "Description": "Webinar gratis satu ini pas untuk para orangtua yang mau tahu minat dan bakat anaknya. Bersama psikolog profesional, kamu akan dibantu untuk menghubungkan minat dan bakat anak. Selain itu, kamu juga akan mengetahui hal apa aja yang harus dilakukan agar minat dan bakat anak meningkat",
+  "Banner":"https://s3-ap-southeast-1.amazonaws.com/loket-production-sg/images/banner/20210104140245_5ff2bd95ae377.jpg",
+  "Price":100000,
+  "Quantity":1,
+  "event_start_date":"2021-06-01T15:04:05+07:00",
+  "event_end_date":"2021-06-01T15:04:05+07:00",
+  "campaign_start_date":"2021-04-27T15:04:05+07:00",
+  "campaign_end_date":"2021-05-27T15:04:05+07:00"
+}
+###
+POST http://localhost:8080/api/admin/event HTTP/1.1
+Content-Type: application/json
+Authorization: {{login.response.headers.Authorization}}
+
+{
+  "title_event": "Kelas Kreatif: Let’s Create Your Original Character",
+  "Description": "Buat yang suka gambar, wajib ikut webinar gratis dari Kelas Kreatif nih! Di sini kemampuan gambarmu akan dikembangkan lebih jauh dengan cara membuat karaktermu sendiri. Mulai dari anatomi dasar, desain karakter, tips, sampai pengembangan karakter, semuanya akan dikupas tuntas. Tunggu apa lagi?",
+  "Banner":"https://s3-ap-southeast-1.amazonaws.com/loket-production-sg/images/banner/20201128111859_5fc1cfb364ab0.jpg",
+  "Price":50000,
+  "Quantity":1,
+  "event_start_date":"2021-06-01T15:04:05+07:00",
+  "event_end_date":"2021-06-01T15:04:05+07:00",
+  "campaign_start_date":"2021-04-27T15:04:05+07:00",
+  "campaign_end_date":"2021-05-27T15:04:05+07:00"
+}
+###
+POST http://localhost:8080/api/admin/event HTTP/1.1
+Content-Type: application/json
+Authorization: {{login.response.headers.Authorization}}
+
+{
+  "title_event": "Webinarku: Tips and Tricks on Essay Writing for Scholarship LPDP",
+  "Description": "Tahun baru biasanya punya resolusi baru. Buat kamu yang beresolusi kuliah dengan beasiswa LPDP, ada kesempatan ikut webinar tips dan trik penulisan esai LPDP secara gratis nih. Di sini kamu bisa bertanya langsung ke pembicara yang sukses mendapat beasiswa tersebut, terdapat alumni Kobe University dan juga London School of Economics. Mau ikut?",
+  "Banner":"https://www.loket.com/images/banner-event.jpg",
+  "Price":35000,
+  "Quantity":1,
+  "event_start_date":"2021-06-01T15:04:05+07:00",
+  "event_end_date":"2021-06-01T15:04:05+07:00",
+  "campaign_start_date":"2021-04-27T15:04:05+07:00",
+  "campaign_end_date":"2021-05-27T15:04:05+07:00"
+}
+###
+POST http://localhost:8080/api/admin/event HTTP/1.1
+Content-Type: application/json
+Authorization: {{login.response.headers.Authorization}}
+
+{
+  "title_event": "Choosing The Right Company That Works For Your Career",
+  "Description": "Memilih perusahaan tempat bekerja itu penting karena berpengaruh besar ke perkembangan karirmu. Untungnya, ada webinar gratis dari Glints yang akan membahas cara memilih perusahaan yang tepat untuk karirmu. Mulai dari perbedaan jenis perusahaan (NGO, start up, perusahaan multinasional, BUMN, dll.), cara mengenal kemampuan diri, sampai mengidentifikasi perusahaan yang cocok untuk kamu, semuanya akan dibahas.",
+  "Banner":"https://s3-ap-southeast-1.amazonaws.com/loket-production-sg/images/banner/20210106101510_5ff52b3eb2051.jpg",
+  "Price":50000,
+  "Quantity":1,
+  "event_start_date":"2021-06-01T15:04:05+07:00",
+  "event_end_date":"2021-06-01T15:04:05+07:00",
+  "campaign_start_date":"2021-04-27T15:04:05+07:00",
+  "campaign_end_date":"2021-05-27T15:04:05+07:00"
+}
+###
+POST http://localhost:8080/api/admin/event HTTP/1.1
+Content-Type: application/json
+Authorization: {{login.response.headers.Authorization}}
+
+{
+  "title_event": "Webinar Balifiber - Cara Menempatkan Dana Darurat",
+  "Description": "Selamat Siang,\n\nSalam survive, Semoga Bapak dan Ibu selalu diberikan kesehatan.\n\nPandemi COVID-19 memaksa para pelaku usaha bisnis untuk terus berjuang keras beradaptasi dan menyesuaikan diri agar bisa melalui situasi ketidakpastian ekonomi seperti saat ini. Disaat ini juga harus lebih pintar lagi dalam mengelola keuangan kita,  agar terhindar dari pinjaman yang tinggi dan dapat mengatasi biaya mendadak lainnya dengan baik.\n\nBagaimana cara tepat dalam menempatkan dana darurat saat ini ?\n\nYuk temukan cara tepatnya dalam webinar kami minggu ini, Bertema \"Cara Menempatkan Dana Darurat\". Tentunya bersama speaker kami yang berkompeten, Yaitu :\n\nAndy Hartoyo – Account Manager Balifiber\nSandy Afriliando -  Brand Manager IPOTPLAN\n \n\nDAFTAR kan segera diri Anda! Ada banyak hadiah menarik untuk kamu.\n\n\nUntuk informasi lebih lanjut dapat menghubungi :\nDipomagto Purba : +62 877- 4170 - 5877\n\nTerima kasih\n\nBig Hope You Can Join Us\n\n#SalamSuksesBalifiber",
+  "Banner":"https://s3-ap-southeast-1.amazonaws.com/loket-production-sg/images/banner/20210419182919_607d698f6f00f.jpg",
+  "Price":50000,
+  "Quantity":1,
+  "event_start_date":"2021-06-01T15:04:05+07:00",
+  "event_end_date":"2021-06-01T15:04:05+07:00",
+  "campaign_start_date":"2021-04-27T15:04:05+07:00",
+  "campaign_end_date":"2021-05-27T15:04:05+07:00"
+}
+###
+POST http://localhost:8080/api/admin/event HTTP/1.1
+Content-Type: application/json
+Authorization: {{login.response.headers.Authorization}}
+
+{
+  "title_event": "Webinar GRATIS 3 Skill Internet",
+  "Description": "Akhirnya ada strategi Internet Marketing yang bisa memberikan terobosan penghasilan untuk Anda!\n\n \n\nSiapa lagi yang mau optimalkan internet seperti mantan karyawan arsitek 20 tahun untuk meningkatkan Income & Profit?\n\n \n\nSimak kisah Ibu Kristine Emalia yang mampu membawa mamanya operasi dengan biaya sekitar Rp 700 juta serta punya bisnis global di 160 negara.\n\n \n\nHal-hal yang akan Anda temukan dalam webinar ini adalah:\n\n- Temukan Formula Bisnis Internet yang dapat diterapkan dalam bisnis apapun.\n\n- Lihat strategi yang digunakan para Top Internet Millionaire untuk mendapatkan banyak komisi.\n\n- Apa model bisnis yang dapat dikerjakan orang awam/gaptek tanpa harus punya keahlian internet?\n\n- Temukan 3 keahlian terpenting yang harus dimiliki pebisnis yang ingin me-leverage internet untuk meningkatkan bisnisnya\n\n- Dapatkan cara cepat memiliki 3 keahlian tersebut tanpa harus ikut banyak seminar/workshop\n\n \n\nWebinar ini dapat disaksikan dari rumah melalui laptop/HP anda dan masih tersedia tiket GRATIS-nya. Segera daftar sebelum pendaftaran ditutup!\n\n",
+  "Banner":"https://s3-ap-southeast-1.amazonaws.com/loket-production-sg/images/banner/20210424180828_6083fc2c648ce.jpg",
+  "Price":50000,
+  "Quantity":1,
+  "event_start_date":"2021-05-01T15:04:05+07:00",
+  "event_end_date":"2021-05-01T15:04:05+07:00",
+  "campaign_start_date":"2021-04-27T15:04:05+07:00",
+  "campaign_end_date":"2021-05-27T15:04:05+07:00"
+}
+###

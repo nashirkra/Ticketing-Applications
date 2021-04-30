@@ -1,0 +1,26 @@
+# @name login
+POST http://localhost:8080/api/auth/login HTTP/1.1
+Content-Type: application/json
+Authorization: {{login.response.headers.Authorization}}
+
+{
+    "email":"fathimah@mail.com",
+    "password":"passftahimah"
+}
+###
+POST http://localhost:8080/api/auth/login HTTP/1.1
+Content-Type: application/json
+{
+    "email":"fatih@mail.com",
+    "password":"passfatih"
+}
+###
+# @name login
+POST http://localhost:8080/api/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email":"nasir@mail.com",
+    "password":"passnasir"
+}
+###
