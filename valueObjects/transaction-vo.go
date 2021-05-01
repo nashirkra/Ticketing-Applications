@@ -101,48 +101,93 @@ func (trx *transactionVO) CreateTransaction(ctx context.Context, c *redis.Client
 }
 
 func (trx *transactionVO) UpdateTransaction(ctx context.Context, c *redis.Client) (entity.Transaction, error) {
-	var data entity.Transaction
 
 	// block updating without ID
 	if trx.transaction.ID == 0 {
-		return data, errs("Transaction ID not match")
+		return *trx.transaction, errs("Transaction ID not match")
 	}
 	// get key first
 	key := "transaction_" + strconv.Itoa(trx.transaction.ID)
 
-	// get previous data
-	oldData, err := trx.GetTransaction(ctx, c, key)
-	if err != nil {
-		return data, err
-	}
-
 	// create timestamp
 	trx.transaction.UpdatedAt = idn()
+
+	var cancelled = false
+	if (trx.transaction.StatusPayment == "Canceled") || (trx.transaction.StatusPayment == "Refund & Cancelled") {
+		cancelled = true
+	}
 
 	// define new value to be update
 	// and determine overwrite old data
 
 	// // TRY to generate hash args
-	// args := setArgs(trx.transaction)
+	args := setArgs(trx.transaction)
+
+	// check event and user not null
 	isZeroEvent := reflect.ValueOf(trx.transaction).Elem().FieldByName("EventId").IsZero()
 	isZeroUser := reflect.ValueOf(trx.transaction).Elem().FieldByName("ParticipantId").IsZero()
+	// generate unique 1 ticket/participant/event
+	// to validating Unique Key for 1 ticket/participant/event
+	evKey := "event_" + strconv.Itoa(trx.transaction.EventId)
+	userKey := "user_" + strconv.Itoa(trx.transaction.ParticipantId)
 
-	fmt.Printf("isZeroEvent: %+v\nisZeroUser: %+v\n%+v\n\n", isZeroEvent, isZeroUser, oldData)
-	/*
-		if !(trx.transaction.EventId.IsZero || trx.transaction.ParticipantId.IsZero) {
-		// generate unique 1 ticket/participant/event
-		// to validating Unique Key for 1 ticket/participant/event
-		evKey := "event_" + strconv.Itoa(trx.transaction.EventId)
-		userKey := "user_" + strconv.Itoa(trx.transaction.ParticipantId)
-		uk, erruk := CheckUnique(ctx, c, "uk_transaction", userKey+":"+evKey)
-		if erruk == nil {
-			if len(uk) > 0 {
-				return *trx.transaction, fmt.Errorf("participants have purchased tickets for this event before")
-			}
+	if !(isZeroEvent || isZeroUser) {
+
+		// get previous data
+		oldData, err := trx.GetTransaction(ctx, c, key)
+		if err != nil {
+			return oldData, err
 		}
-		} */
+		oldEvKey := "event_" + strconv.Itoa(oldData.EventId)
+		oldUserKey := "user_" + strconv.Itoa(oldData.ParticipantId)
+		if userKey+":"+evKey != oldUserKey+":"+oldEvKey {
+			uk, erruk := CheckUnique(ctx, c, "uk_transaction", userKey+":"+evKey)
+			if erruk == nil {
+				if len(uk) > 0 {
+					return *trx.transaction, fmt.Errorf("participants have purchased tickets for this event before")
+				}
+			}
+			uk_transaction := []string{key, userKey + ":" + evKey}
+			b, err := json.Marshal(uk_transaction)
+			if err != nil {
+				return *trx.transaction, err
+			}
 
-	return data, nil
+			_ = AddUnique(ctx, c, "uk_transaction", string(b))
+
+			old_uk_transaction := []string{key, oldUserKey + ":" + oldEvKey}
+			old_b, err := json.Marshal(old_uk_transaction)
+			if err != nil {
+				return *trx.transaction, err
+			}
+			_ = DelUnique(ctx, c, "uk_transaction", string(old_b))
+		}
+	} else {
+		return *trx.transaction, fmt.Errorf("participants and event not found")
+	}
+
+	// insert All field
+	_, err := c.HSet(ctx, key, args).Result()
+	if err != nil {
+		return *trx.transaction, fmt.Errorf("hset: %v", err)
+	}
+
+	if cancelled {
+		uk_transaction := []string{key, userKey + ":" + evKey}
+		b, err := json.Marshal(uk_transaction)
+		if err != nil {
+			return *trx.transaction, err
+		}
+		_ = DelUnique(ctx, c, "uk_transaction", string(b))
+	}
+
+	newTransaction, err := trx.GetTransaction(ctx, c, key)
+	if err != nil {
+		return *trx.transaction, err
+	}
+	trx.transaction = &newTransaction
+
+	return *trx.transaction, nil
 }
 
 func (trx *transactionVO) GetTransaction(ctx context.Context, c *redis.Client, key string) (entity.Transaction, error) {

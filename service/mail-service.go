@@ -40,6 +40,7 @@ func SendMailTrx(mailto string, data interface{}) {
 	err := smtp.SendMail(smtpHost+":"+smtpPort, auth, from, to, body.Bytes())
 	if err != nil {
 		fmt.Println(err)
+		fmt.Println(data)
 		return
 	}
 	fmt.Println("Email Sent!")

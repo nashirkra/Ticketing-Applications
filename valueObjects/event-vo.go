@@ -236,6 +236,12 @@ func getField(v interface{}, field string) string {
 		return "false"
 	case entity.User:
 		return string(redis.Nil)
+	case gorm.DeletedAt:
+		t, err := time.Parse("2006-01-02 15:04:05 +0700 +07", v.Time.String())
+		if err != nil {
+			fmt.Printf("time.Parse: %+v\nerror:%+v", v, err)
+		}
+		return strconv.FormatInt(t.UnixNano(), 10)
 	case time.Time:
 		t, err := time.Parse("2006-01-02 15:04:05 +0700 +07", v.String())
 		if err != nil {
@@ -285,6 +291,11 @@ func setField(obj interface{}, field string, value string) error {
 	case bool:
 		gv, _ := strconv.ParseBool(value)
 		structFieldValue.SetBool(gv)
+	case gorm.DeletedAt:
+		gv, _ := strconv.Atoi(value)
+		t := time.Unix(0, int64(gv))
+		gdel := gorm.DeletedAt{Time: t}
+		structFieldValue.Set(reflect.ValueOf(gdel))
 	case time.Time:
 		gv, _ := strconv.Atoi(value)
 		t := time.Unix(0, int64(gv))

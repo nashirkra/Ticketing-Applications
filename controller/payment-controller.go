@@ -10,6 +10,7 @@ import (
 	"github.com/nashirkra/Ticketing-Applications/helper"
 	"github.com/nashirkra/Ticketing-Applications/service"
 	"github.com/nashirkra/Ticketing-Applications/valueObjects"
+	"gorm.io/gorm"
 )
 
 type PaymentController interface {
@@ -72,7 +73,6 @@ func (c *paymentController) Pay(ctx *gin.Context) {
 			ctx.AbortWithStatusJSON(http.StatusBadRequest, response)
 			return
 		}
-		fmt.Printf("Pyment:%+v\n\n", getTicket)
 
 		updateVO.ParticipantId = getTicket.ParticipantId
 		updateVO.EventId = getTicket.EventId
@@ -119,7 +119,8 @@ func (c *paymentController) Cancel(ctx *gin.Context) {
 		updateVO.ParticipantId = getTicket.ParticipantId
 		updateVO.EventId = getTicket.EventId
 		updateVO.ID, _ = strconv.Atoi(ticketID)
-		updateVO.StatusPayment = "Refund & Cancelled"
+		updateVO.StatusPayment = "Cancelled"
+		updateVO.DeletedAt = gorm.DeletedAt{Time: helper.TimeIn("Jakarta"), Valid: true}
 		result, err := c.transationService.Update(updateVO)
 		if err != nil {
 			response := helper.BuildErrorResponse("Failed to Update Transaction", err.Error(), helper.EmptyObj{})

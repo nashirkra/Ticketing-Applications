@@ -50,9 +50,9 @@ func (serv *transactionService) Update(trx valueObjects.Transaction) (entity.Tra
 	}
 
 	res, err := serv.trxRepo.UpdateTransaction(trxToUpdate)
-	// res.Participant = serv.userRepository.ProfileUser(strconv.Itoa(res.ParticipantId))
-	// res.Event = serv.eventRepo.GetEvent(strconv.Itoa(res.EventId))
-	// res.Event.Creator = serv.userRepository.ProfileUser(strconv.Itoa(res.Event.CreatorId))
+	res.Participant = serv.userRepository.ProfileUser(strconv.Itoa(res.ParticipantId))
+	res.Event = serv.eventRepo.GetEvent(strconv.Itoa(res.EventId))
+	res.Event.Creator = serv.userRepository.ProfileUser(strconv.Itoa(res.Event.CreatorId))
 	return res, err
 }
 func (serv *transactionService) GetTicket(trxID string) (entity.Transaction, error) {
